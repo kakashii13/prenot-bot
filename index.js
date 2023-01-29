@@ -16,9 +16,8 @@ const getChatId = async () => {
 
 const checkPrenot = async () => {
   // init browser
-  const browser = await puppeteer.launch({
-    executablePath: "/path/to/chromium",
-  });
+  // process.env.PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium-browser";
+  const browser = await puppeteer.launch();
 
   const page = await browser.newPage();
 
