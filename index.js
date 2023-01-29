@@ -18,7 +18,6 @@ const checkPrenot = async () => {
   // init browser
   const browser = await puppeteer.launch({
     headless: true,
-    executablePath: stats.executablePath,
     args: ["--no-sandbox"],
   });
 
