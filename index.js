@@ -3,16 +3,17 @@ const puppeteer = require("puppeteer");
 const TelegramBot = require("node-telegram-bot-api");
 
 const tokenTelegram = process.env.TELEGRAM_TOKEN;
+const chatId = process.env.CHAT_ID;
 const user = process.env.USER_PRENOT;
 const password = process.env.PASSWORD_PRENOT;
 
 const bot = new TelegramBot(tokenTelegram);
 
-// get the id chat of telegram
-const getChatId = async () => {
-  const updates = await bot.getUpdates();
-  return updates[0].message.chat.id;
-};
+// // get the id chat of telegram
+// const getChatId = async () => {
+//   const updates = await bot.getUpdates();
+//   return updates[0].message.chat.id;
+// };
 
 const checkPrenot = async () => {
   // init browser
@@ -42,14 +43,12 @@ const checkPrenot = async () => {
 
     const data = await page.$(".jconfirm-holder", { timeout: 300000 });
 
-    const chatId = await getChatId();
     if (!data) {
       bot.sendMessage(chatId, "hay turno?");
     } else {
       bot.sendMessage(chatId, "no hay turno");
     }
   } catch (error) {
-    const chatId = await getChatId();
     console.log("Error: ", error);
     bot.sendMessage(chatId, error);
   }
