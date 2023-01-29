@@ -16,8 +16,7 @@ const getChatId = async () => {
 
 const checkPrenot = async () => {
   // init browser
-  // process.env.PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium-browser";
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: false });
 
   const page = await browser.newPage();
 
@@ -47,6 +46,7 @@ const checkPrenot = async () => {
       bot.sendMessage(chatId, "no hay turno");
     }
   } catch (error) {
+    const chatId = await getChatId();
     console.log("Error: ", error);
     bot.sendMessage(chatId, error);
   }
