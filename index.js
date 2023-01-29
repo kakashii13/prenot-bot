@@ -18,7 +18,8 @@ const checkPrenot = async () => {
   // init browser
   const browser = await puppeteer.launch({
     headless: true,
-    executablePath: "/usr/bin/chromium-browser",
+    executablePath: stats.executablePath,
+    args: ["--no-sandbox"],
   });
 
   const page = await browser.newPage();
