@@ -9,12 +9,6 @@ const password = process.env.PASSWORD_PRENOT;
 
 const bot = new TelegramBot(tokenTelegram);
 
-// // get the id chat of telegram
-// const getChatId = async () => {
-//   const updates = await bot.getUpdates();
-//   return updates[0].message.chat.id;
-// };
-
 const checkPrenot = async () => {
   // init browser
   const browser = await puppeteer.launch({
@@ -45,8 +39,6 @@ const checkPrenot = async () => {
 
     if (!data) {
       bot.sendMessage(chatId, "hay turno?");
-    } else {
-      bot.sendMessage(chatId, "no hay turno");
     }
   } catch (error) {
     console.log("Error: ", error);
