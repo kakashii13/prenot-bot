@@ -44,6 +44,10 @@ const checkPrenot = async () => {
     console.log("Error: ", error);
     bot.sendMessage(chatId, error);
   }
+
+  setTimeout(() => {
+    bot.sendMessage(chatId, "funciona xd");
+  }, 60000);
   await browser.close();
   setTimeout(checkPrenot, 3600000);
 };
