@@ -1,6 +1,7 @@
 require("dotenv").config();
 const puppeteer = require("puppeteer");
 const TelegramBot = require("node-telegram-bot-api");
+const schedule = require("node-schedule");
 
 const tokenTelegram = process.env.TELEGRAM_TOKEN;
 const chatId = process.env.CHAT_ID;
@@ -45,11 +46,15 @@ const checkPrenot = async () => {
     bot.sendMessage(chatId, error);
   }
 
-  setTimeout(() => {
-    bot.sendMessage(chatId, "funciona xd");
-  }, 60000);
   await browser.close();
-  setTimeout(checkPrenot, 3600000);
 };
 
 checkPrenot();
+
+// execute code every hour
+schedule.scheduleJob("0 * * * *", checkPrenot);
+
+// send notification of server activity every five days
+schedule.scheduleJob("0 0 10/5 * *", () => {
+  bot.sendMessage(chatId, "El servidor sigue activo.");
+});
